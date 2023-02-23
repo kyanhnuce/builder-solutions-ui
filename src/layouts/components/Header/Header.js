@@ -1,4 +1,5 @@
-import { useState, useEffect } from 'react';
+/* eslint-disable jsx-a11y/heading-has-content */
+import { useState, useEffect, useCallback } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -7,11 +8,13 @@ import {
   faSpinner,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-
 import Tippy from '@tippyjs/react/headless';
+
+import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MainMenu from '~/components/MainMenu';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
+import ItemSearch from '~/components/ItemSearch';
 
 const cx = classNames.bind(styles);
 
@@ -36,14 +39,19 @@ const MAIN_MENU = [
 
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
+  const [currentSearch, setCurrentSearch] = useState(false);
+  const [buttonSearch, setButtonSearch] = useState(true);
 
   useEffect(() => {
     setTimeout(() => {
       setSearchResult([1, 2, 3]);
-    }, 3000);
+    }, 0);
   });
 
-  const currentSearch = true;
+  const handleShowInput = useCallback(() => {
+    setCurrentSearch(!currentSearch);
+    currentSearch === true ? setButtonSearch(true) : setButtonSearch(false);
+  }, [currentSearch]);
 
   return (
     <header className={cx('wrapper')}>
@@ -55,9 +63,17 @@ function Header() {
           <Tippy
             visible={searchResult.length > 0}
             interactive
+            placement="bottom-start"
             render={(attrs) => (
               <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                Search Results
+                <PopperWrapper>
+                  <h3 className={cx('search-title')}>
+                    Thông tin sản phẩm/giải pháp
+                  </h3>
+                  <ItemSearch />
+                  <ItemSearch />
+                  <ItemSearch />
+                </PopperWrapper>
               </div>
             )}
           >
@@ -76,7 +92,7 @@ function Header() {
                 <button className={cx('find-btn')}>
                   <FontAwesomeIcon icon={faMagnifyingGlass} />
                 </button>
-                <button className={cx('close-btn')}>
+                <button className={cx('close-btn')} onClick={handleShowInput}>
                   <FontAwesomeIcon icon={faXmark} />
                 </button>
               </div>
@@ -96,11 +112,13 @@ function Header() {
             <MainMenu mainMenu items={MAIN_MENU}>
               Các dự án
             </MainMenu>
-            <MainMenu mainSearch>
-              <FontAwesomeIcon icon={faMagnifyingGlass} />
-            </MainMenu>
           </div>
         )}
+        {buttonSearch ? (
+          <button className={cx('search-btn')} onClick={handleShowInput}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} />
+          </button>
+        ) : null}
       </div>
     </header>
   );
