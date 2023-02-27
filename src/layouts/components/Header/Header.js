@@ -37,10 +37,36 @@ const MAIN_MENU = [
   },
 ];
 
+const menuItem = [
+  {
+    title: 'Trang chủ',
+    to: '/',
+  },
+  {
+    title: 'Liên hệ',
+    to: '/profile',
+  },
+  {
+    title: 'Sản phẩm',
+    to: '/item',
+  },
+  {
+    title: 'Các dự án',
+    to: '/projects',
+  },
+];
+
 function Header() {
   const [searchResult, setSearchResult] = useState([]);
   const [currentSearch, setCurrentSearch] = useState(false);
   const [buttonSearch, setButtonSearch] = useState(true);
+
+  // Handle show Menu Item (not done)
+  const menuItemShow = () => {
+    const menuItemIndex = menuItem.map((item) => item.index);
+    if (menuItemIndex === 1) {
+    }
+  };
 
   useEffect(() => {
     setTimeout(() => {

@@ -50,16 +50,17 @@
 }
 
 .search {
-  flex: 1;
+  width: 100%;
   position: relative;
   display: flex;
   padding-left: 10px;
   border-top: 0;
   height: 4rem;
   border-bottom: solid 2px var(--black);
+  animation: inputShow 0.5s linear;
 
   input {
-    flex: 1;
+    width: 100%;
     border: none;
     outline: none;
     height: 100%;
@@ -68,6 +69,15 @@
     line-height: 1rem;
     color: var(--black);
     background-color: transparent;
+  }
+}
+
+@keyframes inputShow {
+  from {
+    width: 10%;
+  }
+  to {
+    width: 100%;
   }
 }
 
@@ -119,7 +129,6 @@
     color: var(--white);
   }
 }
-
 .search-btn {
   font-size: 2rem;
   line-height: 2.3rem;
@@ -133,8 +142,4 @@
     cursor: pointer;
     color: var(--white);
   }
-}
-
-.disabled {
-  display: none;
 }
