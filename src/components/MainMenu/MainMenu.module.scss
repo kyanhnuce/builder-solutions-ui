@@ -10,9 +10,38 @@
   background-color: transparent;
 }
 
-.mainMenu {
+.main-menu {
+  display: inline-block;
+  position: relative;
+  text-align: center;
   font-size: 1.8rem;
   line-height: 2.3rem;
   font-weight: 500;
   cursor: pointer;
+
+  &:hover {
+    color: var(--white);
+  }
+
+  &:after {
+    display: block;
+    content: '';
+    border-bottom: solid 3px;
+    border-image-slice: 1;
+    border-image-source: linear-gradient(to right bottom, #6a5af9, #f62682);
+    transform: scaleX(0);
+    transition: transform 250ms ease-in-out;
+  }
+
+  &:hover:after {
+    transform: scaleX(1);
+  }
+}
+
+.menu-list {
+  width: 18rem;
+}
+
+.menu-popper {
+  padding-bottom: 8px;
 }

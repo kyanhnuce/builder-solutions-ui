@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import { useState, useEffect, useCallback } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -20,37 +20,22 @@ const cx = classNames.bind(styles);
 
 const MAIN_MENU = [
   {
+    id: 1,
     title: 'Trang chủ',
     to: '/',
   },
   {
+    id: 2,
     title: 'Liên hệ',
     to: '/profile',
   },
   {
+    id: 3,
     title: 'Sản phẩm',
     to: '/item',
   },
   {
-    title: 'Các dự án',
-    to: '/projects',
-  },
-];
-
-const menuItem = [
-  {
-    title: 'Trang chủ',
-    to: '/',
-  },
-  {
-    title: 'Liên hệ',
-    to: '/profile',
-  },
-  {
-    title: 'Sản phẩm',
-    to: '/item',
-  },
-  {
+    id: 4,
     title: 'Các dự án',
     to: '/projects',
   },
@@ -61,23 +46,16 @@ function Header() {
   const [currentSearch, setCurrentSearch] = useState(false);
   const [buttonSearch, setButtonSearch] = useState(true);
 
-  // Handle show Menu Item (not done)
-  const menuItemShow = () => {
-    const menuItemIndex = menuItem.map((item) => item.index);
-    if (menuItemIndex === 1) {
-    }
-  };
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setSearchResult([1, 2, 3]);
+  //   }, 0);
+  // });
 
-  useEffect(() => {
-    setTimeout(() => {
-      setSearchResult([1, 2, 3]);
-    }, 0);
-  });
-
-  const handleShowInput = useCallback(() => {
+  const handleShowInput = () => {
     setCurrentSearch(!currentSearch);
     currentSearch === true ? setButtonSearch(true) : setButtonSearch(false);
-  }, [currentSearch]);
+  };
 
   return (
     <header className={cx('wrapper')}>
@@ -126,18 +104,11 @@ function Header() {
           </Tippy>
         ) : (
           <div className={cx('actions')}>
-            <MainMenu mainMenu items={MAIN_MENU}>
-              Trang chủ
-            </MainMenu>
-            <MainMenu mainMenu items={MAIN_MENU}>
-              Liên hệ
-            </MainMenu>
-            <MainMenu mainMenu items={MAIN_MENU}>
-              Sản phẩm
-            </MainMenu>
-            <MainMenu mainMenu items={MAIN_MENU}>
-              Các dự án
-            </MainMenu>
+            {MAIN_MENU.map((item, index) => (
+              <MainMenu key={index} value={item}>
+                {item.title}
+              </MainMenu>
+            ))}
           </div>
         )}
         {buttonSearch ? (
