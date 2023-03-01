@@ -1,8 +1,10 @@
 /* eslint-disable jsx-a11y/heading-has-content */
-import { useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
+import OnClickOut from 'react-onclickoutside';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
+  faBarsStaggered,
   faCircleXmark,
   faMagnifyingGlass,
   faSpinner,
@@ -12,49 +14,75 @@ import Tippy from '@tippyjs/react/headless';
 
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MainMenu from '~/components/MainMenu';
+import HeaderMenu from '~/components/Popper/MenuItem/HeaderMenu';
+import Button from '~/components/Button/Button';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
 import ItemSearch from '~/components/ItemSearch';
+import { MainMenuArray, MainMenuArrayMoblie } from '~/array';
 
 const cx = classNames.bind(styles);
 
-const MAIN_MENU = [
-  {
-    id: 1,
-    title: 'Trang chủ',
-    to: '/',
-  },
-  {
-    id: 2,
-    title: 'Liên hệ',
-    to: '/profile',
-  },
-  {
-    id: 3,
-    title: 'Sản phẩm',
-    to: '/item',
-  },
-  {
-    id: 4,
-    title: 'Các dự án',
-    to: '/projects',
-  },
-];
+const defaultFn = () => {};
 
-function Header() {
+function Header({ onChange = defaultFn }) {
   const [searchResult, setSearchResult] = useState([]);
-  const [currentSearch, setCurrentSearch] = useState(false);
-  const [buttonSearch, setButtonSearch] = useState(true);
+  const [mainMenuMobile, setMainMenuMobile] = useState([{ data: [] }]);
+  const [toggleSearch, setToggleSearch] = useState(true);
+  const [toggleMenu, setToggleMenus] = useState(true);
 
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     setSearchResult([1, 2, 3]);
-  //   }, 0);
-  // });
+  // Lấy phần tử cuối cùng của mảng
+  const current = mainMenuMobile[mainMenuMobile.length - 1];
 
+  // Handle show/toggle input
   const handleShowInput = () => {
-    setCurrentSearch(!currentSearch);
-    currentSearch === true ? setButtonSearch(true) : setButtonSearch(false);
+    setToggleSearch(!toggleSearch);
+  };
+
+  // Handle show/toggle main menu layout in mobile
+  const handleMainMeuLayout = () => {
+    setToggleMenus(!toggleMenu);
+  };
+
+  // Render main menu sreen PC
+  const renderMenu = () => {
+    return MainMenuArray.map((item, index) => (
+      <MainMenu mainMenuScreen key={index} value={item} />
+    ));
+  };
+
+  // Render main menu sreen Mobile
+  const fetchMainMenuMobile = useCallback(() => {
+    setMainMenuMobile([{ data: MainMenuArrayMoblie }]);
+  }, []);
+
+  useEffect(() => {
+    fetchMainMenuMobile();
+  }, [fetchMainMenuMobile]);
+
+  const renderMenuMobile = () => {
+    return current.data.map((item, index) => {
+      const isParent = !!item.children;
+      return (
+        <MainMenu
+          mainMenuMobile
+          key={index}
+          value={item}
+          onClick={() => {
+            if (isParent) {
+              setMainMenuMobile((prev) => [...prev, item.children]);
+            } else {
+              onChange(item);
+            }
+          }}
+        />
+      );
+    });
+  };
+
+  // Cắt đến phần tử ở cuối
+  const handleBack = () => {
+    setMainMenuMobile((prev) => prev.slice(0, prev.length - 1));
   };
 
   return (
@@ -63,7 +91,9 @@ function Header() {
         <div className={cx('logo')}>
           <img src={images.logo} alt="Logo Company" />
         </div>
-        {currentSearch ? (
+        {toggleSearch ? (
+          <div className={cx('actions')}>{renderMenu()}</div>
+        ) : (
           <Tippy
             visible={searchResult.length > 0}
             interactive
@@ -102,20 +132,37 @@ function Header() {
               </div>
             </div>
           </Tippy>
-        ) : (
-          <div className={cx('actions')}>
-            {MAIN_MENU.map((item, index) => (
-              <MainMenu key={index} value={item}>
-                {item.title}
-              </MainMenu>
-            ))}
-          </div>
         )}
-        {buttonSearch ? (
+        {toggleSearch ? (
           <button className={cx('search-btn')} onClick={handleShowInput}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
         ) : null}
+        <div className={cx('inner-mobile')}>
+          {toggleMenu ? (
+            <button
+              className={cx('toggle-menu-btn')}
+              onClick={handleMainMeuLayout}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
+          ) : (
+            <button
+              className={cx('show-menu-btn')}
+              onClick={handleMainMeuLayout}
+            >
+              <FontAwesomeIcon icon={faBarsStaggered} />
+            </button>
+          )}
+          {toggleMenu && (
+            <div className={cx('actions-mobile')}>
+              {mainMenuMobile.length > 1 && (
+                <HeaderMenu title={current.title} onBack={handleBack} />
+              )}
+              {renderMenuMobile()}
+            </div>
+          )}
+        </div>
       </div>
     </header>
   );

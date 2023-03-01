@@ -14,9 +14,13 @@
 
 // Header Menu
 .header {
+  display: flex;
   position: relative;
+  align-items: center;
+  text-align: center;
   height: 40px;
   flex-shrink: 0;
+  width: 100%;
 }
 .back-btn {
   display: block;
@@ -29,6 +33,7 @@
 }
 .header-title {
   position: absolute;
+  width: 50%;
   font-size: 1.4rem;
   font-size: 1.4rem;
   font-weight: 600;

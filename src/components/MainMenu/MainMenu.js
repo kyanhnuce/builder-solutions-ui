@@ -1,5 +1,5 @@
 /* eslint-disable array-callback-return */
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './MainMenu.module.scss';
@@ -118,107 +118,111 @@ const projectsMenu = [
 
 const defaultFn = () => {};
 
-function MainMenu({
-  value,
-  to,
-  href,
-  children,
-  onClick,
-  onChange = defaultFn,
-  ...pastProps
-}) {
-  let Comp = 'button';
-
-  const classes = cx('wrapper', 'main-menu');
-
-  const [menuItem, setMenuItem] = useState([{ data: [] }]);
-  const [showValueMenu, setShowValueMenu] = useState(true);
-
-  // Phân cấp mảng
-
-  // Lấy phần tử cuối cùng của mảng
-  const current = menuItem[menuItem.length - 1];
-
-  // Handle show Menu Item
-  useEffect(() => {
-    const menuId = value.id;
-    if (menuId === 2) {
-      setMenuItem([{ data: profileMenu }]);
-    } else if (menuId === 3) {
-      setMenuItem([{ data: itemsMenu }]);
-    } else if (menuId === 4) {
-      setMenuItem([{ data: projectsMenu }]);
-    } else if (menuId === 1) {
-      setShowValueMenu(false);
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  const props = {
+const MainMenu = React.memo(
+  ({
+    value,
+    to,
+    href,
+    children,
+    mainMenuScreen = false,
+    mainMenuMobile = false,
     onClick,
-    // Trường hợp đẩy thêm props ngoài
-    ...pastProps,
-  };
+    onChange = defaultFn,
+    ...pastProps
+  }) => {
+    let Comp = 'button';
 
-  if (to) {
-    props.to = to;
-    Comp = Link;
-  } else if (href) {
-    props.href = href;
-    Comp = 'a';
-  }
-
-  console.log(current);
-
-  const renderItems = () => {
-    return current.data.map((item, index) => {
-      // Kiểm tra mảng chả có chứa phần tử con hay không
-      const isParent = !!item.children;
-
-      return (
-        <MenuItem
-          key={index}
-          data={item}
-          onClick={() => {
-            if (isParent) {
-              setMenuItem((prev) => [...prev, item.children]);
-            } else {
-              onChange(item);
-            }
-          }}
-        />
-      );
+    const classes = cx('wrapper', {
+      mainMenuScreen,
+      mainMenuMobile,
     });
-  };
 
-  // Cắt đến phần tử ở cuối
-  const handleBack = () => {
-    setMenuItem((prev) => prev.slice(0, prev.length - 1));
-  };
+    const [menuItem, setMenuItem] = useState([{ data: [] }]);
+    const [showValueMenu, setShowValueMenu] = useState(true);
 
-  return (
-    <Tippy
-      // visible
-      interactive
-      placement="bottom-start"
-      render={(attrs) =>
-        showValueMenu ? (
-          <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-            <PopperWrapper className={cx('menu-popper')}>
-              {menuItem.length > 1 && (
-                <HeaderMenu title={current.title} onBack={handleBack} />
-              )}
-              <div className={cx('menu-body')}>{renderItems()}</div>
-            </PopperWrapper>
-          </div>
-        ) : null
+    // Lấy phần tử cuối cùng của mảng
+    const current = menuItem[menuItem.length - 1];
+
+    // Handle show Menu Item
+    useEffect(() => {
+      const selectId = value.id;
+      if (selectId === 2) {
+        setMenuItem([{ data: profileMenu }]);
+      } else if (selectId === 3) {
+        setMenuItem([{ data: itemsMenu }]);
+      } else if (selectId === 4) {
+        setMenuItem([{ data: projectsMenu }]);
+      } else if (selectId === 1) {
+        setShowValueMenu(false);
       }
-    >
-      <Comp className={classes} {...props}>
-        {children}
-      </Comp>
-    </Tippy>
-  );
-}
+      // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
+
+    const props = {
+      onClick,
+      // Trường hợp đẩy thêm props ngoài
+      ...pastProps,
+    };
+
+    if (to) {
+      props.to = to;
+      Comp = Link;
+    } else if (href) {
+      props.href = href;
+      Comp = 'a';
+    }
+
+    const renderItems = () => {
+      return current.data.map((item, index) => {
+        // Kiểm tra mảng chả có chứa phần tử con hay không
+        const isParent = !!item.children;
+
+        return (
+          <MenuItem
+            key={index}
+            data={item}
+            onClick={() => {
+              if (isParent) {
+                setMenuItem((prev) => [...prev, item.children]);
+              } else {
+                onChange(item);
+              }
+            }}
+          />
+        );
+      });
+    };
+
+    // Cắt đến phần tử ở cuối
+    const handleBack = () => {
+      setMenuItem((prev) => prev.slice(0, prev.length - 1));
+    };
+
+    return (
+      <Tippy
+        // visible
+        interactive
+        placement="bottom-start"
+        offset={[10, 5]}
+        render={(attrs) =>
+          showValueMenu ? (
+            <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+              <PopperWrapper className={cx('menu-popper')}>
+                {menuItem.length > 1 && (
+                  <HeaderMenu title={current.title} onBack={handleBack} />
+                )}
+                <div className={cx('menu-body')}>{renderItems()}</div>
+              </PopperWrapper>
+            </div>
+          ) : null
+        }
+      >
+        <Comp className={classes} {...props}>
+          <span className={cx('title')}>{value.title}</span>
+        </Comp>
+      </Tippy>
+    );
+  },
+);
 
 export default MainMenu;

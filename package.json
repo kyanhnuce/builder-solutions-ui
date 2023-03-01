@@ -26,6 +26,7 @@
     "customize-cra": "^1.0.0",
     "prettier": "^2.8.4",
     "react-app-rewired": "^2.2.1",
+    "react-onclickoutside": "^6.12.2",
     "sass": "^1.58.3"
   },
   "scripts": {
