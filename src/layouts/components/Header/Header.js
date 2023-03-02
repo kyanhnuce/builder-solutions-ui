@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/heading-has-content */
+import { Link } from 'react-router-dom';
 import { useCallback, useEffect, useState } from 'react';
-import OnClickOut from 'react-onclickoutside';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
@@ -19,7 +19,8 @@ import Button from '~/components/Button/Button';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
 import ItemSearch from '~/components/ItemSearch';
-import { MainMenuArray, MainMenuArrayMoblie } from '~/array';
+import { MainMenuArray, MainMenuArrayMoblie } from '~/array/arrayMainMenu';
+import config from '~/config';
 
 const cx = classNames.bind(styles);
 
@@ -59,7 +60,6 @@ function Header({ onChange = defaultFn }) {
   useEffect(() => {
     fetchMainMenuMobile();
   }, [fetchMainMenuMobile]);
-
   const renderMenuMobile = () => {
     return current.data.map((item, index) => {
       const isParent = !!item.children;
@@ -88,9 +88,9 @@ function Header({ onChange = defaultFn }) {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <div className={cx('logo')}>
+        <Link to={config.routes.home} className={cx('logo')}>
           <img src={images.logo} alt="Logo Company" />
-        </div>
+        </Link>
         {toggleSearch ? (
           <div className={cx('actions')}>{renderMenu()}</div>
         ) : (
@@ -141,20 +141,20 @@ function Header({ onChange = defaultFn }) {
         <div className={cx('inner-mobile')}>
           {toggleMenu ? (
             <button
-              className={cx('toggle-menu-btn')}
-              onClick={handleMainMeuLayout}
-            >
-              <FontAwesomeIcon icon={faXmark} />
-            </button>
-          ) : (
-            <button
               className={cx('show-menu-btn')}
               onClick={handleMainMeuLayout}
             >
               <FontAwesomeIcon icon={faBarsStaggered} />
             </button>
+          ) : (
+            <button
+              className={cx('toggle-menu-btn')}
+              onClick={handleMainMeuLayout}
+            >
+              <FontAwesomeIcon icon={faXmark} />
+            </button>
           )}
-          {toggleMenu && (
+          {!toggleMenu && (
             <div className={cx('actions-mobile')}>
               {mainMenuMobile.length > 1 && (
                 <HeaderMenu title={current.title} onBack={handleBack} />

@@ -7,7 +7,7 @@
   width: 100%;
   height: 7rem;
   box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
-  background-image: linear-gradient(to bottom right, var(--first), var(--last));
+  background: linear-gradient(to bottom right, var(--first), var(--last));
   color: var(--text-color);
   opacity: 0.8;
   padding: 0 30px;
@@ -146,6 +146,7 @@
   }
 }
 
+// Mobile responsive
 .inner-mobile {
   display: none;
   position: relative;
