@@ -1,12 +1,12 @@
 import Intro from '~/components/Intro';
 
-function Profile() {
+function Items() {
   console.log(<Intro />);
   return (
     <h1>
-      <Intro profile />
+      <Intro items />
     </h1>
   );
 }
 
-export default Profile;
+export default Items;

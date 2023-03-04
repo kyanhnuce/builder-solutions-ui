@@ -6,39 +6,32 @@
   width: 100%;
   height: 100%;
 }
-.intro {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  position: relative;
-}
 
 // Content
 .container {
   display: flex;
   flex-direction: column;
-  width: 90%;
+  margin: auto;
+  width: 80%;
+  max-width: 1600px;
 }
 // Profile
 .profile {
-  display: block;
   margin: auto;
   text-align: justify;
   padding: 20px 0;
 }
 // Projects
 .projects {
-  display: block;
   margin: auto;
+  padding: 20px 0;
 }
 .projects-item {
   display: flex;
   align-items: center;
   justify-content: center;
   flex-flow: row wrap;
-  margin: 10px 0;
+  margin: 10px auto;
 }
 .projects-item_content {
   display: flex;
@@ -93,9 +86,13 @@
 // Items
 .items {
   text-align: justify;
+  margin: auto;
   padding: 20px 0;
 }
 .news {
+  text-align: justify;
+  margin: auto;
+  padding: 20px 0;
 }
 
 @media screen and (max-width: 1050px) {

@@ -24,6 +24,7 @@
   "devDependencies": {
     "babel-plugin-module-resolver": "^5.0.0",
     "customize-cra": "^1.0.0",
+    "json-server": "^0.17.2",
     "prettier": "^2.8.4",
     "react-app-rewired": "^2.2.1",
     "react-onclickoutside": "^6.12.2",
@@ -33,7 +34,8 @@
     "start": "react-app-rewired start",
     "build": "react-app-rewired build",
     "test": "react-app-rewired test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "startjson": "json-server --watch items.json --port 3004"
   },
   "eslintConfig": {
     "extends": [

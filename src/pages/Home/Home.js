@@ -4,7 +4,7 @@ import styles from './Home.module.scss';
 
 import Images from '~/components/Images';
 import images from '~/assets/images';
-import Intro from '~/layouts/components/Intro';
+import Intro from '~/components/Intro';
 
 const cx = classNames.bind(styles);
 
@@ -59,9 +59,7 @@ function Home() {
   return (
     <div className={cx('wrapper')}>
       {/* Intro layout */}
-      <nav className={cx('intro')}>
-        <Intro />
-      </nav>
+      <Intro home />
       {/* Content */}
       <section className={cx('container')}>
         {/* Profile Layout */}

@@ -10,15 +10,16 @@
   background: linear-gradient(to bottom right, var(--first), var(--last));
   color: var(--text-color);
   opacity: 0.8;
-  padding: 0 30px;
 }
 
 .inner {
-  width: 100%;
+  max-width: 1600px;
+  width: 80%;
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin: auto;
 }
 
 .logo {
