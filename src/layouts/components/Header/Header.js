@@ -1,24 +1,20 @@
 /* eslint-disable jsx-a11y/heading-has-content */
 import { Link } from 'react-router-dom';
-import { useCallback, useEffect, useState } from 'react';
+import { Fragment, useCallback, useEffect, useState } from 'react';
 import classNames from 'classnames/bind';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faBarsStaggered,
-  faCircleXmark,
   faMagnifyingGlass,
-  faSpinner,
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
-import Tippy from '@tippyjs/react/headless';
 
-import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MainMenu from '~/components/MainMenu';
 import HeaderMenu from '~/components/Popper/MenuItem/HeaderMenu';
 import Button from '~/components/Button/Button';
+import Search from '../Search';
 import images from '~/assets/images';
 import styles from './Header.module.scss';
-import ItemSearch from '~/components/ItemSearch';
 import { MainMenuArray, MainMenuArrayMoblie } from '~/array/arrayMainMenu';
 import config from '~/config';
 
@@ -27,7 +23,6 @@ const cx = classNames.bind(styles);
 const defaultFn = () => {};
 
 function Header({ onChange = defaultFn }) {
-  const [searchResult, setSearchResult] = useState([]);
   const [mainMenuMobile, setMainMenuMobile] = useState([{ data: [] }]);
   const [toggleSearch, setToggleSearch] = useState(true);
   const [toggleMenu, setToggleMenus] = useState(true);
@@ -94,44 +89,7 @@ function Header({ onChange = defaultFn }) {
         {toggleSearch ? (
           <div className={cx('actions')}>{renderMenu()}</div>
         ) : (
-          <Tippy
-            visible={searchResult.length > 0}
-            interactive
-            placement="bottom-start"
-            render={(attrs) => (
-              <div className={cx('search-result')} tabIndex="-1" {...attrs}>
-                <PopperWrapper>
-                  <h3 className={cx('search-title')}>
-                    Thông tin sản phẩm/giải pháp
-                  </h3>
-                  <ItemSearch />
-                  <ItemSearch />
-                  <ItemSearch />
-                </PopperWrapper>
-              </div>
-            )}
-          >
-            <div className={cx('search-container')}>
-              <div className={cx('search')}>
-                <input
-                  placeholder="Tìm kiếm sản phẩm, giải pháp,..."
-                  spellCheck={false}
-                />
-                <button className={cx('clear')}>
-                  <FontAwesomeIcon icon={faCircleXmark} />
-                </button>
-                {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
-              </div>
-              <div className={cx('button')}>
-                <button className={cx('find-btn')}>
-                  <FontAwesomeIcon icon={faMagnifyingGlass} />
-                </button>
-                <button className={cx('close-btn')} onClick={handleShowInput}>
-                  <FontAwesomeIcon icon={faXmark} />
-                </button>
-              </div>
-            </div>
-          </Tippy>
+          <Search onClick={handleShowInput} />
         )}
         {toggleSearch ? (
           <button className={cx('search-btn')} onClick={handleShowInput}>
