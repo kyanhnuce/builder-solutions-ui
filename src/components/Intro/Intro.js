@@ -27,9 +27,9 @@ const IntroItem = [
   },
 ];
 
-function Intro({ home = false, profile = false, ...pastProps }) {
+function Intro({ home = false, profile = false, items = false, ...pastProps }) {
   const [introItem, setIntroItem] = useState([]);
-  const props = { home, profile, ...pastProps };
+  const props = { home, profile, items, ...pastProps };
   useEffect(() => {
     if (!!props.home) {
       setIntroItem(IntroItem.slice(0, 1));

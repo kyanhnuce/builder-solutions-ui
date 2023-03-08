@@ -1,24 +1,20 @@
+import { Link } from 'react-router-dom';
 import classNames from 'classnames/bind';
 import styles from './ItemSearch.module.scss';
 
+import Images from '../Images';
+
 const cx = classNames.bind(styles);
 
-function ItemSearch() {
+function ItemSearch({ data }) {
   return (
-    <div className={cx('wrapper')}>
-      <img
-        className={cx('images')}
-        src="https://cdn.sika.com/cdn/Channel/PIM/02-en_vn-Sikadur-732-1x1_hybrisProductImages.png"
-        alt="Sikadur"
-      />
+    <Link to={`/@${data.name}`} className={cx('wrapper')}>
+      <Images className={cx('images')} src={data.images} alt={data.name} />
       <div className={cx('info')}>
-        <h4 className={cx('title')}>Sikadur</h4>
-        <span className={cx('name')}>
-          Sikadur®-732 là chất kết nối gốc nhựa epoxy chọn lọc, 2 thành phần,
-          không dung môi.
-        </span>
+        <h4 className={cx('title')}>{data.title}</h4>
+        <span className={cx('description')}>{data.description}</span>
       </div>
-    </div>
+    </Link>
   );
 }
 

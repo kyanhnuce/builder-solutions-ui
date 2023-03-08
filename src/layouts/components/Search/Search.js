@@ -23,6 +23,26 @@ function Search({ onClick }) {
 
   const inputRef = useRef();
 
+  useEffect(() => {
+    // Thoát hàm trong tình huống k có searchValue
+    if (!searchValue.trim()) {
+      return;
+    }
+
+    setLoading(true);
+
+    fetch(
+      `https://builder-api.herokuapp.com/items/sika-solutions/search?q=${encodeURIComponent(
+        searchValue,
+      )}&type=less`,
+    )
+      .then((res) => res.json())
+      .then((res) => {
+        setSearchResult(res);
+        setLoading(false);
+      });
+  }, [searchValue]);
+
   // Xử lí xóa kết quả trong ô tìm kiếm
   const handleClear = () => {
     setSearchValue('');
@@ -36,16 +56,16 @@ function Search({ onClick }) {
 
   return (
     <Tippy
-      visible={showResult || searchResult.length > 0}
+      visible={showResult && searchResult.length > 0}
       interactive
       placement="bottom-start"
       render={(attrs) => (
         <div className={cx('search-result')} tabIndex="-1" {...attrs}>
           <PopperWrapper>
             <h3 className={cx('search-title')}>Thông tin sản phẩm/giải pháp</h3>
-            <ItemSearch />
-            <ItemSearch />
-            <ItemSearch />
+            {searchResult.map((result) => (
+              <ItemSearch key={result.id} data={result} />
+            ))}
           </PopperWrapper>
         </div>
       )}
@@ -61,12 +81,14 @@ function Search({ onClick }) {
             onChange={(e) => setSearchValue(e.target.value)}
             onFocus={() => setShowResult(true)}
           />
-          {!!searchValue && (
+          {!!searchValue && !loading && (
             <button className={cx('clear')} onClick={handleClear}>
               <FontAwesomeIcon icon={faCircleXmark} />
             </button>
           )}
-          {/* <FontAwesomeIcon className={cx('loading')} icon={faSpinner} /> */}
+          {loading && (
+            <FontAwesomeIcon className={cx('loading')} icon={faSpinner} />
+          )}
         </div>
         <div className={cx('button')}>
           <button className={cx('find-btn')}>

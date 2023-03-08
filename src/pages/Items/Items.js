@@ -1,11 +1,11 @@
 import Intro from '~/components/Intro';
 
 function Items() {
-  console.log(<Intro />);
   return (
-    <h1>
+    <div>
+      <h1>Items page</h1>
       <Intro items />
-    </h1>
+    </div>
   );
 }
 

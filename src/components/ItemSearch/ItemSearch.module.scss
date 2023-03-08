@@ -3,6 +3,7 @@
   align-items: center;
   padding: 10px 14px;
   cursor: pointer;
+  background-color: var(--white);
 
   &:hover {
     background-image: var(--linear);
@@ -21,7 +22,7 @@
   font-size: 1.6rem;
   font-weight: 600;
 }
-.name {
+.description {
   font-size: 1.4rem;
   color: var(--text-color);
 }
