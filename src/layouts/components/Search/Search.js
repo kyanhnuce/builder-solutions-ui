@@ -7,11 +7,13 @@ import {
   faXmark,
 } from '@fortawesome/free-solid-svg-icons';
 import Tippy from '@tippyjs/react/headless';
-
 import classNames from 'classnames/bind';
+
+import * as searchServices from '~/apiServices/searchServices';
 import styles from './Search.module.scss';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import ItemSearch from '~/components/ItemSearch';
+import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
@@ -23,34 +25,38 @@ function Search({ onClick }) {
 
   const inputRef = useRef();
 
+  // Xử lí gõ ô input delay 5s gửi trả về backend
+  const debounceValue = useDebounce(searchValue, 500);
+
   useEffect(() => {
     // Thoát hàm trong tình huống k có searchValue
-    if (!searchValue.trim()) {
+    if (!debounceValue.trim()) {
       return;
     }
 
-    setLoading(true);
+    const fetchApi = async () => {
+      setLoading(true);
 
-    fetch(
-      `https://builder-api.herokuapp.com/items/sika-solutions/search?q=${encodeURIComponent(
-        searchValue,
-      )}&type=less`,
-    )
-      .then((res) => res.json())
-      .then((res) => {
-        setSearchResult(res);
-        setLoading(false);
-      });
-  }, [searchValue]);
+      const result = await searchServices.search(debounceValue);
+
+      setSearchResult(result);
+
+      setLoading(false);
+    };
+
+    fetchApi();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debounceValue]);
 
   // Xử lí xóa kết quả trong ô tìm kiếm
   const handleClear = () => {
     setSearchValue('');
+    setSearchResult([]);
     inputRef.current.focus();
   };
 
   // Xử lí ẩn kết quả
-  const handleHideReult = () => {
+  const handleHideResult = () => {
     setShowResult(false);
   };
 
@@ -69,7 +75,7 @@ function Search({ onClick }) {
           </PopperWrapper>
         </div>
       )}
-      onClickOutside={handleHideReult}
+      onClickOutside={handleHideResult}
     >
       <div className={cx('search-container')}>
         <div className={cx('search')}>
