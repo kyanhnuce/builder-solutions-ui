@@ -6,9 +6,9 @@ import Images from '../Images';
 
 const cx = classNames.bind(styles);
 
-function ItemSearch({ data }) {
+function ItemSearch({ data, onClick }) {
   return (
-    <Link to={`/@${data.name}`} className={cx('wrapper')}>
+    <Link to={`/${data.name}`} className={cx('wrapper')} onClick={onClick}>
       <Images className={cx('images')} src={data.images} alt={data.name} />
       <div className={cx('info')}>
         <h4 className={cx('title')}>{data.title}</h4>

@@ -1,60 +1,34 @@
-import { Fragment } from 'react';
+import { useState, useEffect } from 'react';
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 
-import Images from '~/components/Images';
-import images from '~/assets/images';
+import * as itemServices from '~/apiServices/itemServices';
+import BoxItems from '~/components/BoxItems/BoxItems';
 import Intro from '~/components/Intro';
+import { projectsItem } from '~/array/arrayProjects';
 
 const cx = classNames.bind(styles);
 
-const Projects_item = [
-  {
-    img: images.local,
-    alt: 'Trong nước',
-    title: 'Trong Nước',
-    content:
-      'Những công trình được sử dụng sản phẩm bởi các hãng do Builder-Solutions cung cấp vận hành trong nước',
-  },
-  {
-    img: images.international,
-    alt: 'Quốc tế',
-    title: 'Quốc Tế',
-    content:
-      'Những công trình được sử dụng sản phẩm bởi các hãng do Builder-Solutions cung cấp vận hành tại thị trường quốc tế',
-  },
-  {
-    img: images.other,
-    alt: 'Khác',
-    title: 'Dự Án Đặc Biệt',
-    content:
-      'Ngoài ra, có những dự án đặc biệt sử dụng các sản phẩm chuyên dụng như trụ điện gió, sân bay, công nghệ điện tử,...',
-  },
-  {
-    img: images.other,
-    alt: 'Contact',
-    title: 'Kênh phân phối',
-    content:
-      'Hệ thống cửa hàng trong nước và quốc tế cùng với thông tin nhà máy của các hãng đối tác được sản xuất trong nước.',
-  },
-];
-
 function Home() {
-  const renderProjects = () => {
-    return Projects_item.map((item, index) => (
-      <Fragment key={index}>
-        <div className={cx('projects-item_content')}>
-          <div className={cx('images')}>
-            <Images className={cx('img')} src={item.img} alt={item.alt} />
-          </div>
-          <div className={cx('projects-text')}>
-            <h2>{item.title}</h2>
-            <p>{item.content}</p>
-          </div>
-        </div>
-      </Fragment>
-    ));
-  };
+  const [titleList, setTitleList] = useState([]);
+  const [itemsValue, setItemsValue] = useState([]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const resultTitle = await itemServices.title();
+      setTitleList(resultTitle);
+
+      // Chờ cho tất cả các Promise trong mảng resultPromises trả về kết quả, sau đó lưu vào mảng result
+      const resultPromises = resultTitle.map((title) =>
+        itemServices.like(title),
+      );
+      const result = await Promise.all(resultPromises);
+      setItemsValue(result);
+    };
+
+    fetchData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   return (
     <div className={cx('wrapper')}>
@@ -81,10 +55,27 @@ function Home() {
         {/* Project layout */}
         <div className={cx('projects')}>
           <h1>Thị Trường Tiêu Biểu</h1>
-          <div className={cx('projects-item')}>{renderProjects()}</div>
+          <div className={cx('projects-content')}>
+            <BoxItems items={projectsItem} project imgLarge textLarge />
+          </div>
         </div>
         <div className={cx('items')}>
           <h1>Sản Phẩm Được Yêu Thích</h1>
+          {titleList.map((item, index) => (
+            <div key={index} className={cx('items-container')}>
+              <h2>{item}</h2>
+              {itemsValue[index] && (
+                <div className={cx('items-content')}>
+                  <BoxItems
+                    items={itemsValue[index].data}
+                    itemsLike
+                    imgMedium
+                    textMedium
+                  />
+                </div>
+              )}
+            </div>
+          ))}
         </div>
         <div className={cx('news')}>
           <h1>Tin tức</h1>

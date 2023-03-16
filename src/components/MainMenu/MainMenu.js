@@ -193,34 +193,45 @@ const MainMenu = React.memo(
       });
     };
 
+    const renderResult = (attrs) =>
+      showValueMenu ? (
+        <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
+          <PopperWrapper className={cx('menu-popper')}>
+            {menuItem.length > 1 && (
+              <HeaderMenu title={current.title} onBack={handleBack} />
+            )}
+            <div className={cx('menu-body')}>{renderItems()}</div>
+          </PopperWrapper>
+        </div>
+      ) : null;
+
     // Cắt đến phần tử ở cuối
     const handleBack = () => {
       setMenuItem((prev) => prev.slice(0, prev.length - 1));
     };
 
+    // Reset tự back về trang menu đầu tiên
+    const handleReset = () => {
+      setMenuItem((prev) => prev.slice(0, 1));
+    };
+
     return (
-      <Tippy
-        // visible
-        interactive
-        placement="bottom-start"
-        offset={[10, 5]}
-        render={(attrs) =>
-          showValueMenu ? (
-            <div className={cx('menu-list')} tabIndex="-1" {...attrs}>
-              <PopperWrapper className={cx('menu-popper')}>
-                {menuItem.length > 1 && (
-                  <HeaderMenu title={current.title} onBack={handleBack} />
-                )}
-                <div className={cx('menu-body')}>{renderItems()}</div>
-              </PopperWrapper>
-            </div>
-          ) : null
-        }
-      >
-        <Comp className={classes} {...props}>
-          <span className={cx('title')}>{value.title}</span>
-        </Comp>
-      </Tippy>
+      // Using a wrapper <div> or <span> tag around the reference
+      // element solves this by creating a new parentNode context.
+      <div>
+        <Tippy
+          // visible
+          interactive
+          placement="bottom-start"
+          offset={[10, 5]}
+          onHide={handleReset}
+          render={renderResult}
+        >
+          <Comp className={classes} {...props}>
+            <span className={cx('title')}>{value.title}</span>
+          </Comp>
+        </Tippy>
+      </div>
     );
   },
 );

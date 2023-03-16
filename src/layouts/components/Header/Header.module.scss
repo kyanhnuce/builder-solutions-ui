@@ -7,9 +7,12 @@
   width: 100%;
   height: 7rem;
   box-shadow: 0px 1px 1px rgb(0 0 0 / 12%);
-  background: linear-gradient(to bottom right, var(--first), var(--last));
+  background: linear-gradient(
+    to bottom right,
+    var(--first-header),
+    var(--last-header)
+  );
   color: var(--text-color);
-  opacity: 0.8;
 }
 
 .inner {
@@ -122,7 +125,7 @@
   }
 }
 
-@media screen and (max-width: 700px) {
+@media screen and (max-width: 850px) {
   .wrapper {
     padding: 0;
   }
@@ -134,5 +137,9 @@
 
   .actions-mobile {
     width: 150px;
+  }
+
+  .search-btn {
+    display: none;
   }
 }

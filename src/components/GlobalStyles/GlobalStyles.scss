@@ -3,6 +3,8 @@
 :root {
   --first: #00bbff;
   --last: #ffbbff;
+  --first-header: rgba(0, 187, 255, 0.8);
+  --last-header: rgba(255, 187, 255, 0.8);
   --primary: #88bbff;
   --linear: linear-gradient(to bottom right, var(--first), var(--last));
   --black: #000;

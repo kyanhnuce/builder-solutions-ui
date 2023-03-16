@@ -35,16 +35,19 @@ function Header({ onChange = defaultFn }) {
     setToggleSearch(!toggleSearch);
   };
 
-  // Handle show/toggle main menu layout in mobile
-  const handleMainMeuLayout = () => {
-    setToggleMenus(!toggleMenu);
-  };
-
   // Render main menu sreen PC
   const renderMenu = () => {
     return MainMenuArray.map((item, index) => (
       <MainMenu mainMenuScreen key={index} value={item} />
     ));
+  };
+
+  // Handle show/toggle main menu layout in mobile
+  const handleMainMeuLayout = () => {
+    setToggleMenus(!toggleMenu);
+
+    // Reset tự back về trang menu đầu tiên
+    setMainMenuMobile((prev) => prev.slice(0, 1));
   };
 
   // Render main menu sreen Mobile
@@ -55,6 +58,7 @@ function Header({ onChange = defaultFn }) {
   useEffect(() => {
     fetchMainMenuMobile();
   }, [fetchMainMenuMobile]);
+
   const renderMenuMobile = () => {
     return current.data.map((item, index) => {
       const isParent = !!item.children;
@@ -91,11 +95,11 @@ function Header({ onChange = defaultFn }) {
         ) : (
           <Search onClick={handleShowInput} />
         )}
-        {toggleSearch ? (
+        {toggleSearch && (
           <button className={cx('search-btn')} onClick={handleShowInput}>
             <FontAwesomeIcon icon={faMagnifyingGlass} />
           </button>
-        ) : null}
+        )}
         <div className={cx('inner-mobile')}>
           {toggleMenu ? (
             <button
