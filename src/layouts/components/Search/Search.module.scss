@@ -5,9 +5,13 @@
   align-items: center;
   justify-content: flex-end;
 }
+
+.page {
+  display: none;
+}
 .search-container {
   width: 50%;
-  height: 100%;
+  height: auto;
   display: flex;
   align-items: center;
   justify-content: flex-end;
@@ -101,8 +105,12 @@
 }
 
 @media screen and (max-width: 1050px) {
+  .wrapper {
+    justify-content: center;
+  }
   .search-container {
     width: 80%;
+    justify-content: center;
   }
 
   .inner-mobile {
@@ -113,6 +121,13 @@
 @media screen and (max-width: 850px) {
   .wrapper {
     padding: 0;
+    justify-content: center;
+  }
+  .page {
+    display: flex;
+    height: 10rem;
+    border-radius: 5px;
+    background: var(--linear);
   }
 
   .inner-mobile {
@@ -122,5 +137,13 @@
 
   .actions-mobile {
     width: 150px;
+  }
+  .search {
+    background: var(--white);
+    border: solid 2px var(--black);
+  }
+
+  .close-btn {
+    display: none;
   }
 }

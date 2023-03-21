@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { HashLink as Link } from 'react-router-hash-link';
 import classNames from 'classnames/bind';
 import styles from './MainMenu.module.scss';
 import Tippy from '@tippyjs/react/headless';
@@ -8,113 +8,9 @@ import Tippy from '@tippyjs/react/headless';
 import { Wrapper as PopperWrapper } from '~/components/Popper';
 import MenuItem from '~/components/Popper/MenuItem';
 import HeaderMenu from '../Popper/MenuItem/HeaderMenu';
+import { profileMenu, itemsMenu, projectsMenu } from '~/array/arrayMenuItem';
 
 const cx = classNames.bind(styles);
-
-const profileMenu = [
-  {
-    title: 'Về chúng tôi',
-    to: '/about-us',
-  },
-  {
-    title: 'Đối tác',
-    to: '/partner',
-  },
-  {
-    title: 'Tuyển dụng',
-    to: '/job-opportunities',
-  },
-];
-
-const itemsMenu = [
-  {
-    title: 'Sản phẩm hãng Sika',
-    children: {
-      title: 'Sika Solutions',
-      data: [
-        {
-          title: 'Phụ gia bê tông',
-          to: '/',
-        },
-        {
-          title: 'Vữa',
-          to: '/',
-        },
-        {
-          title: 'Sản phẩm chống thấm',
-          to: '/',
-        },
-        {
-          title: 'Trám khe/Chất kết dính',
-          to: '/',
-        },
-      ],
-    },
-  },
-  {
-    title: 'Sản phẩm hãng MBS',
-    children: {
-      title: 'BASF SOLUTIONS',
-      data: [
-        {
-          title: 'Phụ gia bê tông',
-          to: '/',
-        },
-        {
-          title: 'Vữa',
-          to: '/',
-        },
-        {
-          title: 'Sản phẩm chống thấm',
-          to: '/',
-        },
-        {
-          title: 'Trám khe/Chất kết dính',
-          to: '/',
-        },
-      ],
-    },
-  },
-  {
-    title: 'Sản phẩm hãng MC-Bifi',
-    children: {
-      title: 'MC-BIFI SOLUTIONS',
-      data: [
-        {
-          title: 'Phụ gia bê tông',
-          to: '/',
-        },
-        {
-          title: 'Vữa',
-          to: '/',
-        },
-        {
-          title: 'Sản phẩm chống thấm',
-          to: '/',
-        },
-        {
-          title: 'Trám khe/Chất kết dính',
-          to: '/',
-        },
-      ],
-    },
-  },
-];
-
-const projectsMenu = [
-  {
-    title: 'Trong nước',
-    to: '/local-propects',
-  },
-  {
-    title: 'Quốc tế',
-    to: '/international-projects',
-  },
-  {
-    title: 'Khác',
-    to: '/other-projects',
-  },
-];
 
 const defaultFn = () => {};
 
@@ -176,6 +72,24 @@ const MainMenu = React.memo(
       return current.data.map((item, index) => {
         // Kiểm tra mảng chả có chứa phần tử con hay không
         const isParent = !!item.children;
+        // const handleMenuItem = (e) => {
+        //   if (isParent) {
+        //     setMenuItem((prev) => [...prev, item.children]);
+        //   } else if (item.smooth) {
+        //     e.preventDefault();
+
+        //     const target = e.target.getAttribute('href');
+
+        //     setTimeout(() => {
+        //       const element = document.querySelector(target);
+        //       if (element) {
+        //         element.scrollIntoView({ behavior: 'smooth' });
+        //       }
+        //     }, 2000);
+        //   } else {
+        //     onChange(item);
+        //   }
+        // };
 
         return (
           <MenuItem
@@ -220,7 +134,6 @@ const MainMenu = React.memo(
       // element solves this by creating a new parentNode context.
       <div>
         <Tippy
-          // visible
           interactive
           placement="bottom-start"
           offset={[10, 5]}

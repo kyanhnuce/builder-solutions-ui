@@ -24,6 +24,11 @@
   padding-bottom: 8px;
 }
 
+.menu-body {
+  display: flex;
+  flex-direction: column;
+}
+
 .title {
   display: inline-block;
 }

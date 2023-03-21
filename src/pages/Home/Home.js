@@ -1,17 +1,28 @@
 import { useState, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
 
 import * as itemServices from '~/apiServices/itemServices';
 import BoxItems from '~/components/BoxItems/BoxItems';
+import Images from '~/components/Images';
+import Search from '~/layouts/components/Search';
 import Intro from '~/components/Intro';
 import { projectsItem } from '~/array/arrayProjects';
+import { Partners } from '~/array/arrayPartnert';
 
 const cx = classNames.bind(styles);
 
 function Home() {
   const [titleList, setTitleList] = useState([]);
   const [itemsValue, setItemsValue] = useState([]);
+
+  const { pathname } = useLocation();
+
+  if (pathname === '/') {
+    window.scrollTo(0, 0);
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -36,6 +47,7 @@ function Home() {
       <Intro home />
       {/* Content */}
       <section className={cx('container')}>
+        {/* <Search page /> */}
         {/* Profile Layout */}
         <div className={cx('profile')}>
           <h1>VỀ CHÚNG TÔI</h1>
@@ -77,8 +89,19 @@ function Home() {
             </div>
           ))}
         </div>
-        <div className={cx('news')}>
-          <h1>Tin tức</h1>
+        <div className={cx('partners')}>
+          <h1 id="introductions">Các Đối Tác</h1>
+          <div className={cx('partners-content')}>
+            {Partners.map((partner) => (
+              <div key={partner.id} className={cx('partners-logo')}>
+                <Images
+                  src={partner.img}
+                  alt={partner.name}
+                  className={cx('partners-img')}
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>

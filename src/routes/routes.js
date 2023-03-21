@@ -10,7 +10,7 @@ import Items from '~/pages/Items';
 // Publish Routes
 const publicRoutes = [
   { path: config.routes.home, component: Home },
-  { path: config.routes.profile, component: Profile, layout: HeaderProfile },
+  { path: config.routes.profile, component: Profile },
   { path: config.routes.items, component: Items },
 ];
 

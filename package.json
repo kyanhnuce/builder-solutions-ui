@@ -30,6 +30,8 @@
     "prettier": "^2.8.4",
     "react-app-rewired": "^2.2.1",
     "react-onclickoutside": "^6.12.2",
+    "react-router-hash-link": "^2.4.3",
+    "react-scroll": "^1.8.9",
     "sass": "^1.58.3"
   },
   "scripts": {

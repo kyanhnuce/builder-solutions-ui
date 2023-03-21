@@ -20,10 +20,10 @@ const IntroItem = [
   },
   {
     pages: 'Profile Page',
-    img: images.home,
+    img: images.profile,
     alt: 'Profile Image',
     fallbackImg: images.fbackImage,
-    title: 'VỀ CHÚNG TÔI',
+    content: 'TỔNG QUAN',
   },
 ];
 

@@ -44,7 +44,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin: auto;
+  margin: 10px auto;
   max-width: 950px;
 }
 
@@ -53,15 +53,37 @@
   align-items: center;
   justify-content: center;
   flex-flow: row wrap;
-  margin: 10px auto;
+  margin: auto;
   width: 100%;
 }
 
-// News
-.news {
-  text-align: justify;
-  margin: auto;
+// Partners
+.partners {
   padding: 20px 0;
+}
+
+.partners-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.partners-logo {
+  width: 20rem;
+  height: 16rem;
+  margin: 10px 20px;
+  padding: 0 10px;
+  cursor: pointer;
+  box-shadow: 0 1px 2px rgb(0 0 0 / 20%), 0 1px 3px rgb(0 0 0 / 10%);
+  transition: transform 0.3s ease;
+
+  &:hover {
+    transform: scale(1.05);
+  }
+}
+.partners-img {
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
 }
 
 @media screen and (max-width: 1050px) {

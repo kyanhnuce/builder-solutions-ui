@@ -36,7 +36,7 @@ const MainMenuArrayMoblie = [
       data: [
         {
           title: 'Về chúng tôi',
-          to: '/about-us',
+          to: '/profile#items-home',
         },
         {
           title: 'Đối tác',

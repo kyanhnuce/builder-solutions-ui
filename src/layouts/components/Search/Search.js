@@ -17,7 +17,7 @@ import { useDebounce } from '~/hooks';
 
 const cx = classNames.bind(styles);
 
-function Search({ onClick }) {
+function Search({ page = false, onClick }) {
   const [searchValue, setSearchValue] = useState('');
   const [searchResult, setSearchResult] = useState([]);
   const [showResult, setShowResult] = useState(true);
@@ -73,7 +73,7 @@ function Search({ onClick }) {
   return (
     // Using a wrapper <div> or <span> tag around the reference
     // element solves this by creating a new parentNode context.
-    <div className={cx('wrapper')}>
+    <div className={cx('wrapper', { page })}>
       <Tippy
         visible={showResult && searchResult.length > 0}
         interactive
