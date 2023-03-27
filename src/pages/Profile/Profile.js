@@ -100,13 +100,13 @@ function Profile() {
                   <p className={cx('partners-description')}>
                     {partner.description}
                   </p>
-                  <p className={cx('partners-link')}>
+                  <span className={cx('partners-link')}>
                     Xem thêm{' '}
                     <FontAwesomeIcon
                       className={cx('partners-btn')}
                       icon={faAnglesRight}
                     />
-                  </p>
+                  </span>
                 </div>
               </div>
             ))}

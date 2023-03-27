@@ -41,6 +41,18 @@
 
   &:hover {
     transform: scale(1.05);
+    .partners-text {
+      > .partners-link {
+        background: var(--linear);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        > .partners-btn {
+          background-image: var(--linear);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+      }
+    }
   }
 }
 .partners-logo {

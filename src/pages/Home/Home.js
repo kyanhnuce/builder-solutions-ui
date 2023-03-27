@@ -40,6 +40,7 @@ function Home() {
     fetchData();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+  console.log(itemsValue);
 
   return (
     <div className={cx('wrapper')}>

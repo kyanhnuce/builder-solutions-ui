@@ -17,3 +17,12 @@ export const title = async () => {
     console.log(err);
   }
 };
+
+export const items = async (nameItem) => {
+  try {
+    const res = await request.get(`/items/data-name${nameItem}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};
