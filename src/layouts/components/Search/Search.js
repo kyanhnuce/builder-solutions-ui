@@ -88,10 +88,13 @@ function Search({ page = false, onClick }) {
                 <ItemSearch
                   key={result.id}
                   data={result}
-                  onClick={() => {
-                    setSearchValue('');
-                    setSearchResult([]);
-                  }}
+                  onClick={
+                    (() => {
+                      setSearchValue('');
+                      setSearchResult([]);
+                    },
+                    onClick)
+                  }
                 />
               ))}
             </PopperWrapper>

@@ -25,6 +25,13 @@ const IntroItem = [
     fallbackImg: images.fbackImage,
     content: 'TỔNG QUAN',
   },
+  {
+    pages: 'Items Page',
+    img: images.items,
+    alt: 'Profile Image',
+    fallbackImg: images.fbackImage,
+    content: 'SẢN PHẨM',
+  },
 ];
 
 function Intro({ home = false, profile = false, items = false, ...pastProps }) {
@@ -35,6 +42,8 @@ function Intro({ home = false, profile = false, items = false, ...pastProps }) {
       setIntroItem(IntroItem.slice(0, 1));
     } else if (!!props.profile) {
       setIntroItem(IntroItem.slice(1, 2));
+    } else if (!!props.items) {
+      setIntroItem(IntroItem.slice(2, 3));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

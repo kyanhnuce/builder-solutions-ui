@@ -87,7 +87,13 @@ function Header({ onChange = defaultFn }) {
   return (
     <header className={cx('wrapper')}>
       <div className={cx('inner')}>
-        <Link to={config.routes.home} className={cx('logo')}>
+        <Link
+          to={config.routes.home}
+          className={cx('logo')}
+          onClick={() => {
+            setToggleSearch(true);
+          }}
+        >
           <img src={images.logo} alt="Logo Company" />
         </Link>
         {toggleSearch ? (

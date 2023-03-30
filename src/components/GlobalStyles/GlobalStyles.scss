@@ -11,6 +11,9 @@
   --white: #fff;
   --text-color: #161823;
   --font-family: 'Arial', sans-serif;
+  --font-family-title: 'SarabunNew';
+  --font-family-content: 'SarabunNewBold';
+  --font-family-icons: 'Material Design Icons';
 }
 
 * {
@@ -69,3 +72,48 @@ ul {
 }
 
 // fonts embedded
+@font-face {
+  font-family: SarabunNew;
+  src: url('/assets/fonts/Sarabunnew.ttf');
+  font-weight: 200;
+}
+@font-face {
+  font-family: SarabunNew;
+  src: url('/assets/fonts/Sarabunnew.ttf');
+  font-weight: 300;
+}
+@font-face {
+  font-family: SarabunNew;
+  src: url('/assets/fonts/Sarabunnew.ttf');
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: SarabunNew;
+  src: url('/assets/fonts/Sarabunnew.ttf');
+  font-weight: 500;
+}
+
+@font-face {
+  font-family: SarabunNewBold;
+  src: url('/assets/fonts/sarabunnew-bold.ttf');
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: SarabunNewBold;
+  src: url('/assets/fonts/sarabunnew-bold.ttf');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: SofiaPro;
+  src: url('/assets/fonts/sofiapro-bold.woff2');
+  font-weight: 700;
+}
+
+@font-face {
+  font-family: Material Design Icons;
+  src: url('/assets/fonts/materialdesignicons-webfont.woff2');
+  font-weight: 700;
+}

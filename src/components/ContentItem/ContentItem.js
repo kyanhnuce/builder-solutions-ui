@@ -3,7 +3,12 @@ import styles from './ContentItem.module.scss';
 
 const cx = classNames.bind(styles);
 
-function ContentItem({ contents = [], natures = [] }) {
+function ContentItem({
+  contents = [],
+  natures = [],
+  highlight = false,
+  normal = false,
+}) {
   return (
     <div className={cx('wrapper')}>
       {contents.split('/').map((content, index) => (
@@ -13,7 +18,9 @@ function ContentItem({ contents = [], natures = [] }) {
       ))}
       <ul className={cx('nature')}>
         {natures.split('/').map((nature, index) => (
-          <li key={index}>{nature}</li>
+          <li key={index} className={cx({ highlight, normal })}>
+            {nature}
+          </li>
         ))}
       </ul>
     </div>

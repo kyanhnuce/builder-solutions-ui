@@ -1,4 +1,4 @@
-import { useState, useEffect, useMemo } from 'react';
+import { useState, useEffect } from 'react';
 import Intro from '~/components/Intro';
 import { useLocation } from 'react-router-dom';
 
@@ -13,7 +13,7 @@ import Button from '~/components/Button';
 const cx = classNames.bind(styles);
 
 const tabs = ['Tổng quan', 'Tài liệu cá nhân'];
-const tabsPane = ['Ứng dụng', 'Ưu điểm'];
+const tabsPane = ['Ứng dụng', 'Ưu điểm', 'Quy cách đóng gói', 'Màu sắc'];
 
 function Items() {
   const [itemsValue, setItemsValue] = useState([]);
@@ -23,6 +23,8 @@ function Items() {
   const [characteristicNature, setCharacteristicNature] = useState([]);
   const [isDataFetched, setIsDataFetched] = useState(false);
   const [type, setType] = useState('Tổng quan');
+  const [packingItem, setPackingItem] = useState('');
+  const [colorItem, setColorItem] = useState('');
 
   const { pathname } = useLocation();
 
@@ -33,12 +35,26 @@ function Items() {
     const fetchData = async () => {
       const result = await itemServices.items(pathname);
       setItemsValue(result);
-      setApplicationContent(result.map((item) => item.applicationContent));
-      setApplicationNature(result.map((item) => item.applicationNature));
-      setCharacteristicContent(
-        result.map((item) => item.characteristicContent),
+      setApplicationContent(
+        result.map((item) => item.applicationContent || null),
       );
-      setCharacteristicNature(result.map((item) => item.characteristicNature));
+      setApplicationNature(
+        result.map((item) => item.applicationNature ?? item.applicationNature),
+      );
+      setCharacteristicContent(
+        result.map(
+          (item) => item.characteristicContent ?? item.characteristicContent,
+        ),
+      );
+      setCharacteristicNature(
+        result.map(
+          (item) => item.characteristicNature ?? item.applicationContent,
+        ),
+      );
+      result.map((item) => {
+        setPackingItem(item.packing);
+        setColorItem(item.color);
+      });
       setIsDataFetched(true);
     };
     fetchData();
@@ -48,7 +64,7 @@ function Items() {
 
   return (
     <div className={cx('wrapper')}>
-      <Intro home />
+      <Intro items />
       <section className={cx('container')}>
         {/* Content */}
         {itemsValue.map((item) => (
@@ -61,7 +77,11 @@ function Items() {
             <div className={cx('content-general')}>
               <h1>{item.title}</h1>
               <h3>{item.description}</h3>
-              <ContentItem contents={item.content} natures={item.nature} />
+              <ContentItem
+                contents={item.content}
+                natures={item.nature}
+                highlight
+              />
             </div>
           </div>
         ))}
@@ -70,7 +90,9 @@ function Items() {
           {tabs.map((tab) => (
             <Button
               key={tab}
-              className={cx('tabs-items')}
+              className={
+                type === tab ? cx('tabs-items', 'active') : cx('tabs-items')
+              }
               onClick={() => setType(tab)}
             >
               {tab}
@@ -87,13 +109,21 @@ function Items() {
                   <ContentItem
                     contents={applicationContent[0]}
                     natures={applicationNature[0]}
+                    normal
                   />
                 )}
                 {isDataFetched === true && pane === 'Ưu điểm' && (
                   <ContentItem
                     contents={characteristicContent[0]}
                     natures={characteristicNature[0]}
+                    normal
                   />
+                )}
+                {isDataFetched === true && pane === 'Quy cách đóng gói' && (
+                  <p>{packingItem}</p>
+                )}
+                {isDataFetched === true && pane === 'Màu sắc' && (
+                  <p>{colorItem}</p>
                 )}
               </div>
             ))}
