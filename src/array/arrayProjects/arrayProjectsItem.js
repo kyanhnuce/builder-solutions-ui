@@ -4,6 +4,7 @@ const projectsItem = [
   {
     id: 1,
     images: images.local,
+    name: 'local',
     alt: 'Trong nước',
     title: 'Trong Nước',
     description:
@@ -12,6 +13,7 @@ const projectsItem = [
   {
     id: 2,
     images: images.international,
+    name: 'international',
     alt: 'Quốc tế',
     title: 'Quốc Tế',
     description:
@@ -20,6 +22,7 @@ const projectsItem = [
   {
     id: 3,
     images: images.other,
+    name: 'other',
     alt: 'Khác',
     title: 'Dự Án Đặc Biệt',
     description:
@@ -28,6 +31,7 @@ const projectsItem = [
   {
     id: 4,
     images: images.other,
+    name: 'other',
     alt: 'Contact',
     title: 'Kênh phân phối',
     description:

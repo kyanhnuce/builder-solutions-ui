@@ -96,7 +96,7 @@ function Home() {
             {Partners.map((partner) => (
               <div key={partner.id} className={cx('partners-logo')}>
                 <Images
-                  src={partner.img}
+                  src={partner.logo}
                   alt={partner.name}
                   className={cx('partners-img')}
                 />

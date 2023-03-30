@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
-import Intro from '~/components/Intro';
 import { useLocation } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './Items.module.scss';
 
 import * as itemServices from '~/apiServices/itemServices';
+import Intro from '~/components/Intro';
 import Images from '~/components/Images';
 import ContentItem from '~/components/ContentItem';
 import Button from '~/components/Button';
@@ -65,73 +65,75 @@ function Items() {
   return (
     <div className={cx('wrapper')}>
       <Intro items />
-      <section className={cx('container')}>
-        {/* Content */}
-        {itemsValue.map((item) => (
-          <div key={item.id} className={cx('content')}>
-            <Images
-              src={item.images}
-              atl={item.name}
-              className={cx('content-img')}
-            />
-            <div className={cx('content-general')}>
-              <h1>{item.title}</h1>
-              <h3>{item.description}</h3>
-              <ContentItem
-                contents={item.content}
-                natures={item.nature}
-                highlight
+      {isDataFetched === true && (
+        <section className={cx('container')}>
+          {/* Content */}
+          {itemsValue.map((item) => (
+            <div key={item.id} className={cx('content')}>
+              <Images
+                src={item.images}
+                atl={item.name}
+                className={cx('content-img')}
               />
-            </div>
-          </div>
-        ))}
-        {/* Tabs */}
-        <div className={cx('tabs')}>
-          {tabs.map((tab) => (
-            <Button
-              key={tab}
-              className={
-                type === tab ? cx('tabs-items', 'active') : cx('tabs-items')
-              }
-              onClick={() => setType(tab)}
-            >
-              {tab}
-            </Button>
-          ))}
-        </div>
-        {/* Tabs Content */}
-        {type === 'Tổng quan' ? (
-          <div className={cx('tabs-content')}>
-            {tabsPane.map((pane, index) => (
-              <div key={index} className={cx('tabs-text')}>
-                <h3>{pane}</h3>
-                {isDataFetched === true && pane === 'Ứng dụng' && (
-                  <ContentItem
-                    contents={applicationContent[0]}
-                    natures={applicationNature[0]}
-                    normal
-                  />
-                )}
-                {isDataFetched === true && pane === 'Ưu điểm' && (
-                  <ContentItem
-                    contents={characteristicContent[0]}
-                    natures={characteristicNature[0]}
-                    normal
-                  />
-                )}
-                {isDataFetched === true && pane === 'Quy cách đóng gói' && (
-                  <p>{packingItem}</p>
-                )}
-                {isDataFetched === true && pane === 'Màu sắc' && (
-                  <p>{colorItem}</p>
-                )}
+              <div className={cx('content-general')}>
+                <h1>{item.title}</h1>
+                <h3>{item.description}</h3>
+                <ContentItem
+                  contents={item.content}
+                  natures={item.nature}
+                  highlight
+                />
               </div>
+            </div>
+          ))}
+          {/* Tabs */}
+          <div className={cx('tabs')}>
+            {tabs.map((tab) => (
+              <Button
+                key={tab}
+                className={
+                  type === tab ? cx('tabs-items', 'active') : cx('tabs-items')
+                }
+                onClick={() => setType(tab)}
+              >
+                {tab}
+              </Button>
             ))}
           </div>
-        ) : (
-          <p>Truyền file</p>
-        )}
-      </section>
+          {/* Tabs Content */}
+          {type === 'Tổng quan' ? (
+            <div className={cx('tabs-content')}>
+              {tabsPane.map((pane, index) => (
+                <div key={index} className={cx('tabs-text')}>
+                  <h3>{pane}</h3>
+                  {isDataFetched === true && pane === 'Ứng dụng' && (
+                    <ContentItem
+                      contents={applicationContent[0]}
+                      natures={applicationNature[0]}
+                      normal
+                    />
+                  )}
+                  {isDataFetched === true && pane === 'Ưu điểm' && (
+                    <ContentItem
+                      contents={characteristicContent[0]}
+                      natures={characteristicNature[0]}
+                      normal
+                    />
+                  )}
+                  {isDataFetched === true && pane === 'Quy cách đóng gói' && (
+                    <p>{packingItem}</p>
+                  )}
+                  {isDataFetched === true && pane === 'Màu sắc' && (
+                    <p>{colorItem}</p>
+                  )}
+                </div>
+              ))}
+            </div>
+          ) : (
+            <p>Truyền file</p>
+          )}
+        </section>
+      )}
     </div>
   );
 }
