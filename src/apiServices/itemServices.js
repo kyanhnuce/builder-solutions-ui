@@ -26,3 +26,30 @@ export const items = async (nameItem) => {
     console.log(err);
   }
 };
+
+export const solution = async (solution) => {
+  try {
+    const res = await request.get(`/items${solution}`);
+    return res.info;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const category = async (category) => {
+  try {
+    const res = await request.get(`/items${category}`);
+    return res;
+  } catch (err) {
+    console.log(err);
+  }
+};
+
+export const item = async (item) => {
+  try {
+    const res = await request.get(`/items${item}`);
+    return res.data;
+  } catch (err) {
+    console.log(err);
+  }
+};

@@ -22,7 +22,11 @@ function BoxItems({
   const renderItem = () => {
     return items.map((item) => (
       <Button
-        to={item.name ? `/${item.name}` : item.namepr}
+        to={
+          item.name
+            ? `/${item.solution}/${item.category}/${item.name}`
+            : item.namepr
+        }
         key={item.id}
         className={classes}
       >

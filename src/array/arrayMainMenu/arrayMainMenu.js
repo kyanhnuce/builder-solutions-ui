@@ -30,7 +30,6 @@ const MainMenuArrayMoblie = [
   {
     id: 2,
     title: 'Liên hệ',
-    to: '/profile',
     children: {
       title: 'Liên hệ',
       data: [
@@ -52,7 +51,6 @@ const MainMenuArrayMoblie = [
   {
     id: 3,
     title: 'Sản phẩm',
-    to: '/item',
     children: {
       title: 'Sản phẩm/Giải pháp',
       data: [
@@ -63,19 +61,15 @@ const MainMenuArrayMoblie = [
             data: [
               {
                 title: 'Phụ gia bê tông',
-                to: '/',
               },
               {
                 title: 'Vữa',
-                to: '/',
               },
               {
                 title: 'Sản phẩm chống thấm',
-                to: '/',
               },
               {
                 title: 'Trám khe/Chất kết dính',
-                to: '/',
               },
             ],
           },
@@ -87,19 +81,15 @@ const MainMenuArrayMoblie = [
             data: [
               {
                 title: 'Phụ gia bê tông',
-                to: '/',
               },
               {
                 title: 'Vữa',
-                to: '/',
               },
               {
                 title: 'Sản phẩm chống thấm',
-                to: '/',
               },
               {
-                title: 'Trám khe/Chất kết dính',
-                to: '/',
+                title: 'Phụ gia xi măng MasterCem',
               },
             ],
           },
@@ -111,19 +101,15 @@ const MainMenuArrayMoblie = [
             data: [
               {
                 title: 'Phụ gia bê tông',
-                to: '/',
               },
               {
                 title: 'Vữa',
-                to: '/',
               },
               {
                 title: 'Sản phẩm chống thấm',
-                to: '/',
               },
               {
                 title: 'Trám khe/Chất kết dính',
-                to: '/',
               },
             ],
           },

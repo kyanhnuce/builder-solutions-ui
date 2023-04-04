@@ -1,7 +1,7 @@
 const routes = {
   home: '/',
   profile: '/profile',
-  items: '/:name',
+  items: '/:solution/:category/:name',
   partner: '/partner',
 };
 

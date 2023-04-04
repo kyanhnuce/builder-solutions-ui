@@ -8,7 +8,11 @@ const cx = classNames.bind(styles);
 
 function ItemSearch({ data, onClick }) {
   return (
-    <Link to={`/${data.name}`} className={cx('wrapper')} onClick={onClick}>
+    <Link
+      to={`/${data.solution}/${data.category}/${data.name}`}
+      className={cx('wrapper')}
+      onClick={onClick}
+    >
       <Images className={cx('images')} src={data.images} alt={data.name} />
       <div className={cx('info')}>
         <h4 className={cx('title')}>{data.title}</h4>

@@ -33,22 +33,26 @@ function Items() {
       window.scrollTo(0, 0);
     }
     const fetchData = async () => {
-      const result = await itemServices.items(pathname);
+      const result = await itemServices.item(pathname);
       setItemsValue(result);
       setApplicationContent(
-        result.map((item) => item.applicationContent || null),
+        result.map((item) =>
+          item.applicationContent ? item.applicationContent : '',
+        ),
       );
       setApplicationNature(
-        result.map((item) => item.applicationNature ?? item.applicationNature),
+        result.map((item) =>
+          item.applicationNature ? item.applicationNature : '',
+        ),
       );
       setCharacteristicContent(
-        result.map(
-          (item) => item.characteristicContent ?? item.characteristicContent,
+        result.map((item) =>
+          item.characteristicContent ? item.characteristicContent : '',
         ),
       );
       setCharacteristicNature(
-        result.map(
-          (item) => item.characteristicNature ?? item.applicationContent,
+        result.map((item) =>
+          item.characteristicNature ? item.characteristicNature : '',
         ),
       );
       result.map((item) => {
