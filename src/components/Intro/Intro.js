@@ -26,24 +26,39 @@ const IntroItem = [
     content: 'TỔNG QUAN',
   },
   {
+    pages: 'Partner Page',
+    img: images.partner,
+    alt: 'Partner Image',
+    fallbackImg: images.fbackImage,
+    content: 'ĐỐI TÁC',
+  },
+  {
     pages: 'Items Page',
     img: images.items,
-    alt: 'Profile Image',
+    alt: 'Items Image',
     fallbackImg: images.fbackImage,
     content: 'SẢN PHẨM',
   },
 ];
 
-function Intro({ home = false, profile = false, items = false, ...pastProps }) {
+function Intro({
+  home = false,
+  profile = false,
+  partner = false,
+  items = false,
+  ...pastProps
+}) {
   const [introItem, setIntroItem] = useState([]);
-  const props = { home, profile, items, ...pastProps };
+  const props = { home, profile, items, partner, ...pastProps };
   useEffect(() => {
     if (!!props.home) {
       setIntroItem(IntroItem.slice(0, 1));
     } else if (!!props.profile) {
       setIntroItem(IntroItem.slice(1, 2));
-    } else if (!!props.items) {
+    } else if (!!props.partner) {
       setIntroItem(IntroItem.slice(2, 3));
+    } else if (!!props.items) {
+      setIntroItem(IntroItem.slice(3, 4));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

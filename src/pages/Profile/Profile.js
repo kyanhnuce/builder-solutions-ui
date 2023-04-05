@@ -1,5 +1,4 @@
-import { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { animateScroll as scroll } from 'react-scroll';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import classNames from 'classnames/bind';
@@ -13,24 +12,12 @@ import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 const cx = classNames.bind(styles);
 
 function Profile() {
-  const { pathname, hash } = useLocation();
-
-  // useEffect(() => {}, []);
+  const { pathname } = useLocation();
 
   if (pathname === '/profile') {
     scroll.scrollTo(0, 0);
     console.log(pathname);
   }
-  // else if (pathname === '/profile#introductions') {
-  //   console.log(pathname);
-  //   window.onload = () => {
-  //     scroll.scrollTo('introductions', {
-  //       duration: 2000,
-  //       delay: 500,
-  //       smooth: true,
-  //     });
-  //   };
-  // }
 
   return (
     <div className={cx('wrapper')}>
@@ -87,7 +74,11 @@ function Profile() {
           <h1>Các Đối Tác</h1>
           <div className={cx('partners-container')}>
             {Partners.map((partner) => (
-              <div key={partner.id} className={cx('partners-content')}>
+              <Link
+                to={`${partner.name}`}
+                key={partner.id}
+                className={cx('partners-content')}
+              >
                 <div className={cx('partners-logo')}>
                   <Images
                     src={partner.logo}
@@ -96,7 +87,7 @@ function Profile() {
                   />
                 </div>
                 <div className={cx('partners-text')}>
-                  <h2 className={cx('partners-title')}>{partner.name}</h2>
+                  <h2 className={cx('partners-title')}>{partner.title}</h2>
                   <p className={cx('partners-description')}>
                     {partner.description}
                   </p>
@@ -108,7 +99,7 @@ function Profile() {
                     />
                   </span>
                 </div>
-              </div>
+              </Link>
             ))}
           </div>
         </div>

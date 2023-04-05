@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './Home.module.scss';
@@ -93,13 +93,17 @@ function Home() {
           <h1 id="introductions">Các Đối Tác</h1>
           <div className={cx('partners-content')}>
             {Partners.map((partner) => (
-              <div key={partner.id} className={cx('partners-logo')}>
+              <Link
+                to={`${partner.name}`}
+                key={partner.id}
+                className={cx('partners-logo')}
+              >
                 <Images
                   src={partner.logo}
                   alt={partner.name}
                   className={cx('partners-img')}
                 />
-              </div>
+              </Link>
             ))}
           </div>
         </div>

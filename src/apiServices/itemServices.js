@@ -18,15 +18,6 @@ export const title = async () => {
   }
 };
 
-export const items = async (nameItem) => {
-  try {
-    const res = await request.get(`/items/data-name${nameItem}`);
-    return res.data;
-  } catch (err) {
-    console.log(err);
-  }
-};
-
 export const solution = async (solution) => {
   try {
     const res = await request.get(`/items${solution}`);
