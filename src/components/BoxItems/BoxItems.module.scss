@@ -6,9 +6,9 @@
   box-shadow: 0 1px 2px rgb(0 0 0 / 20%), 0 1px 3px rgb(0 0 0 / 10%);
   cursor: pointer;
   position: relative;
-  width: calc(25% - 30px);
   margin: 10px 15px;
   transition: transform 0.5s ease;
+  font-family: var(--font-family-title);
 
   &:hover {
     transform: scale(1.01);
@@ -39,6 +39,10 @@
   height: 22rem;
 }
 
+.imgSmall {
+  height: 20rem;
+}
+
 .img {
   vertical-align: middle;
   margin: auto;
@@ -52,23 +56,28 @@
   margin-top: 10px;
   word-wrap: break-word;
 
-  & h2 {
-    font-size: 1.8rem;
+  & h3 {
+    min-height: 60px;
+    font-size: 3rem;
     line-height: 3rem;
     text-align: left;
   }
 }
 
 .textLarge {
-  height: 170px;
+  height: 200px;
 }
 
 .textMedium {
-  height: 170px;
+  height: 190px;
+}
+
+.textSmall {
+  height: 180px;
 }
 
 .description {
-  font-size: 1.4rem;
+  font-size: 2rem;
   line-height: 2.5rem;
   -webkit-line-clamp: 4;
   display: -webkit-box;

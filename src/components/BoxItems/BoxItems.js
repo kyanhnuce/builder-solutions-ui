@@ -1,5 +1,4 @@
 import { Fragment } from 'react';
-import { Link } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
 import styles from './BoxItems.module.scss';
@@ -9,15 +8,18 @@ import Button from '~/components/Button/Button';
 const cx = classNames.bind(styles);
 
 function BoxItems({
+  className,
   items = [],
   project = false,
   itemsLike = false,
   imgLarge = false,
   imgMedium = false,
+  imgSmall = false,
   textLarge = false,
   textMedium = false,
+  textSmall = false,
 }) {
-  const classes = cx('wrapper', { project, itemsLike });
+  const classes = cx('wrapper', { project, itemsLike, [className]: className });
 
   const renderItem = () => {
     return items.map((item) => (
@@ -30,11 +32,11 @@ function BoxItems({
         key={item.id}
         className={classes}
       >
-        <div className={cx('images', { imgLarge, imgMedium })}>
+        <div className={cx('images', { imgSmall, imgLarge, imgMedium })}>
           <Images className={cx('img')} src={item.images} alt={item.name} />
         </div>
-        <div className={cx('content', { textLarge, textMedium })}>
-          <h2>{item.title}</h2>
+        <div className={cx('content', { textSmall, textLarge, textMedium })}>
+          <h3>{item.title}</h3>
           <p className={cx('description')}>{item.description}</p>
         </div>
       </Button>

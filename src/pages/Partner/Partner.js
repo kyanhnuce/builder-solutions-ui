@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 
 import * as itemServices from '~/apiServices/itemServices';
 import classNames from 'classnames/bind';
@@ -24,14 +24,12 @@ function Partner() {
       const result = await Partners.filter((data) => data.name === pathname);
       setPartnerValue(result);
 
-      const resultCategory = await itemServices.category(pathname);
-      setCategoryValue(resultCategory.info);
+      const resultCategory = await itemServices.solution(pathname);
+      setCategoryValue(resultCategory);
     };
 
     fetchData();
   }, [pathname]);
-
-  console.log(categoryValue);
 
   // Render history theo từng index được truyền vào
   const renderHistory = (history) => {
@@ -81,10 +79,14 @@ function Partner() {
         <h2>Khám phá các Giải pháp</h2>
         <div className={cx('category')}>
           {categoryValue.map((data, index) => (
-            <div key={index} className={cx('category-content')}>
+            <Link
+              to={`/${data.solution}/${data.name}`}
+              key={index}
+              className={cx('category-content')}
+            >
               <h3>{data.title}</h3>
               <p>{data.description}</p>
-            </div>
+            </Link>
           ))}
         </div>
       </section>

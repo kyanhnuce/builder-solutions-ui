@@ -68,7 +68,13 @@ function Home() {
         <div className={cx('projects')}>
           <h1>Thị Trường Tiêu Biểu</h1>
           <div className={cx('projects-content')}>
-            <BoxItems items={projectsItem} project imgLarge textLarge />
+            <BoxItems
+              items={projectsItem}
+              className={cx('col-4')}
+              project
+              imgLarge
+              textLarge
+            />
           </div>
         </div>
         <div className={cx('items')}>
@@ -80,6 +86,7 @@ function Home() {
                 <div className={cx('items-content')}>
                   <BoxItems
                     items={itemsValue[index].data}
+                    className={cx('col-4')}
                     itemsLike
                     imgMedium
                     textMedium

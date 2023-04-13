@@ -3,6 +3,7 @@ const images = {
   home: require('~/assets/images/home-image.jpg'),
   profile: require('~/assets/images/profile-image.jpg'),
   partner: require('~/assets/images/partner-image.jpg'),
+  solution: require('~/assets/images/solutions-intro.webp'),
   items: require('~/assets/images/items-image.jpg'),
   local: require('~/assets/images/project-local.jpg'),
   international: require('~/assets/images/project-international.jpg'),

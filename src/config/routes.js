@@ -1,8 +1,9 @@
 const routes = {
   home: '/',
   profile: '/profile',
-  items: '/:solution/:category/:name',
+  items: '/:partner/:solution/:name',
   partner: '/:partner',
+  solutions: '/:partner/:solution',
 };
 
 export default routes;

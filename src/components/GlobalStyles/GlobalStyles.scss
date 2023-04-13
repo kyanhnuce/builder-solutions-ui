@@ -72,6 +72,13 @@ ul {
   font-family: var(--font-family);
 }
 
+// Responsive
+.col-4 {
+  width: calc(25% - 30px);
+}
+.col-5 {
+  width: calc(20% - 30px);
+}
 // fonts embedded
 @font-face {
   font-family: SarabunNew;

@@ -39,17 +39,25 @@ const IntroItem = [
     fallbackImg: images.fbackImage,
     content: 'SẢN PHẨM',
   },
+  {
+    pages: 'Solutions Page',
+    img: images.solution,
+    alt: 'Solutions Image',
+    fallbackImg: images.fbackImage,
+    content: 'GIẢI PHÁP',
+  },
 ];
 
 function Intro({
   home = false,
   profile = false,
   partner = false,
+  solution = false,
   items = false,
   ...pastProps
 }) {
   const [introItem, setIntroItem] = useState([]);
-  const props = { home, profile, items, partner, ...pastProps };
+  const props = { home, profile, items, partner, solution, ...pastProps };
   useEffect(() => {
     if (!!props.home) {
       setIntroItem(IntroItem.slice(0, 1));
@@ -59,6 +67,8 @@ function Intro({
       setIntroItem(IntroItem.slice(2, 3));
     } else if (!!props.items) {
       setIntroItem(IntroItem.slice(3, 4));
+    } else if (!!props.solution) {
+      setIntroItem(IntroItem.slice(4, 5));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
