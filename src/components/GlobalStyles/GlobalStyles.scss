@@ -7,7 +7,8 @@
   --last-header: rgba(255, 187, 255, 0.8);
   --primary: #88bbff;
   --linear: linear-gradient(to bottom right, var(--first), var(--last));
-  --footer: #f0f7ff;
+  --box-category: #f0f7ff;
+  --footer: #eceff2;
   --black: #000;
   --white: #fff;
   --text-color: #161823;
@@ -124,4 +125,25 @@ ul {
   font-family: Material Design Icons;
   src: url('/assets/fonts/materialdesignicons-webfont.woff2');
   font-weight: 700;
+}
+
+// Custom tippy tooltip
+body {
+  .tippy-box {
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1.2rem;
+    line-height: 2rem;
+    background-color: rgba(211, 207, 207, 0.92);
+  }
+
+  .tippy-arrow {
+    color: rgba(211, 207, 207, 0.92);
+  }
+  .tippy-content {
+    padding: 8px 10px;
+  }
+  .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
+    top: -8px;
+  }
 }

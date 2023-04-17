@@ -20,7 +20,7 @@ const itemsMenu = [
   {
     title: 'Sản phẩm hãng Sika',
     children: {
-      title: 'Sika Solutions',
+      title: 'SIKA SOLUTIONS',
       data: [
         {
           title: 'Phụ gia bê tông',
@@ -51,15 +51,15 @@ const itemsMenu = [
           to: '/',
         },
         {
-          title: 'Vữa',
+          title: 'Giải pháp vữa',
           to: '/',
         },
         {
-          title: 'Sản phẩm chống thấm',
+          title: 'Chống thấm Masterseal',
           to: '/',
         },
         {
-          title: 'Trám khe/Chất kết dính',
+          title: 'Phụ gia xi măng',
           to: '/',
         },
       ],
@@ -71,19 +71,19 @@ const itemsMenu = [
       title: 'MC-BIFI SOLUTIONS',
       data: [
         {
-          title: 'Phụ gia bê tông',
+          title: 'Công nghệ bê tông',
           to: '/',
         },
         {
-          title: 'Vữa',
+          title: 'Công nghệ xi măng',
           to: '/',
         },
         {
-          title: 'Sản phẩm chống thấm',
+          title: 'Chống thấm Mc-Bifi',
           to: '/',
         },
         {
-          title: 'Trám khe/Chất kết dính',
+          title: 'Hệ thống sửa chữa Mc-Bifi',
           to: '/',
         },
       ],
