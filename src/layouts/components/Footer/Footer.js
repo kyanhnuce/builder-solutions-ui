@@ -100,7 +100,7 @@ const arrayFooter = [
 
 function Footer() {
   return (
-    <div className={cx('wrapper')}>
+    <footer className={cx('wrapper')}>
       <div className={cx('container')}>
         {arrayFooter.map((data) => (
           <div key={data.id} className={cx('content')}>
@@ -151,7 +151,7 @@ function Footer() {
           </div>
         ))}
       </div>
-    </div>
+    </footer>
   );
 }
 

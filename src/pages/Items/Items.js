@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Fragment } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import classNames from 'classnames/bind';
@@ -73,69 +73,75 @@ function Items() {
         <section className={cx('container')}>
           {/* Content */}
           {itemsValue.map((item) => (
-            <div key={item.id} className={cx('content')}>
-              <Images
-                src={item.images}
-                atl={item.name}
-                className={cx('content-img')}
-              />
-              <div className={cx('content-general')}>
-                <h1>{item.title}</h1>
-                <h3>{item.description}</h3>
-                <ContentItem
-                  contents={item.content}
-                  natures={item.nature}
-                  highlight
+            <Fragment>
+              <div key={item.id} className={cx('content')}>
+                <Images
+                  src={item.images}
+                  atl={item.name}
+                  className={cx('content-img')}
                 />
-              </div>
-            </div>
-          ))}
-          {/* Tabs */}
-          <div className={cx('tabs')}>
-            {tabs.map((tab) => (
-              <Button
-                key={tab}
-                className={
-                  type === tab ? cx('tabs-items', 'active') : cx('tabs-items')
-                }
-                onClick={() => setType(tab)}
-              >
-                {tab}
-              </Button>
-            ))}
-          </div>
-          {/* Tabs Content */}
-          {type === 'Tổng quan' ? (
-            <div className={cx('tabs-content')}>
-              {tabsPane.map((pane, index) => (
-                <div key={index} className={cx('tabs-text')}>
-                  <h3>{pane}</h3>
-                  {isDataFetched === true && pane === 'Ứng dụng' && (
-                    <ContentItem
-                      contents={applicationContent[0]}
-                      natures={applicationNature[0]}
-                      normal
-                    />
-                  )}
-                  {isDataFetched === true && pane === 'Ưu điểm' && (
-                    <ContentItem
-                      contents={characteristicContent[0]}
-                      natures={characteristicNature[0]}
-                      normal
-                    />
-                  )}
-                  {isDataFetched === true && pane === 'Quy cách đóng gói' && (
-                    <p>{packingItem}</p>
-                  )}
-                  {isDataFetched === true && pane === 'Màu sắc' && (
-                    <p>{colorItem}</p>
-                  )}
+                <div className={cx('content-general')}>
+                  <h1>{item.title}</h1>
+                  <h3>{item.description}</h3>
+                  <ContentItem
+                    contents={item.content}
+                    natures={item.nature}
+                    highlight
+                  />
                 </div>
-              ))}
-            </div>
-          ) : (
-            <p>Truyền file</p>
-          )}
+              </div>
+              {/* Tabs */}
+              <div className={cx('tabs')}>
+                {tabs.map((tab) => (
+                  <Button
+                    key={tab}
+                    className={
+                      type === tab
+                        ? cx('tabs-items', 'active')
+                        : cx('tabs-items')
+                    }
+                    onClick={() => setType(tab)}
+                  >
+                    {tab}
+                  </Button>
+                ))}
+              </div>
+              {/* Tabs Content */}
+              {type === 'Tổng quan' ? (
+                <div className={cx('tabs-content')}>
+                  {tabsPane.map((pane, index) => (
+                    <div key={index} className={cx('tabs-text')}>
+                      <h3>{pane}</h3>
+                      {isDataFetched === true && pane === 'Ứng dụng' && (
+                        <ContentItem
+                          contents={applicationContent[0]}
+                          natures={applicationNature[0]}
+                          normal
+                        />
+                      )}
+                      {isDataFetched === true && pane === 'Ưu điểm' && (
+                        <ContentItem
+                          contents={characteristicContent[0]}
+                          natures={characteristicNature[0]}
+                          normal
+                        />
+                      )}
+                      {isDataFetched === true &&
+                        pane === 'Quy cách đóng gói' && <p>{packingItem}</p>}
+                      {isDataFetched === true && pane === 'Màu sắc' && (
+                        <p>{colorItem}</p>
+                      )}
+                    </div>
+                  ))}
+                </div>
+              ) : (
+                // eslint-disable-next-line react/jsx-no-target-blank
+                <a href={item.link} target="_blank">
+                  <p>Truyền file</p>
+                </a>
+              )}
+            </Fragment>
+          ))}
         </section>
       )}
     </div>

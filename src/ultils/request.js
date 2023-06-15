@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const request = axios.create({
-  baseURL: 'https://builder-api.herokuapp.com/',
+  baseURL: 'https://builder-api.glitch.me/',
 });
 
 export const get = async (path, options = {}) => {

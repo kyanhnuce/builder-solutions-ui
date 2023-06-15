@@ -7,7 +7,6 @@ import styles from './Home.module.scss';
 import * as itemServices from '~/apiServices/itemServices';
 import BoxItems from '~/components/BoxItems/BoxItems';
 import Images from '~/components/Images';
-import Search from '~/layouts/components/Search';
 import Intro from '~/components/Intro';
 import { projectsItem } from '~/array/arrayProjects';
 import { Partners } from '~/array/arrayPartnert';
@@ -70,7 +69,7 @@ function Home() {
           <div className={cx('projects-content')}>
             <BoxItems
               items={projectsItem}
-              className={cx('col-4')}
+              className={cx('col-4', 'col-2', 'col-1')}
               project
               imgLarge
               textLarge
@@ -86,7 +85,7 @@ function Home() {
                 <div className={cx('items-content')}>
                   <BoxItems
                     items={itemsValue[index].data}
-                    className={cx('col-4')}
+                    className={cx('col-4', 'col-2', 'col-1')}
                     itemsLike
                     imgMedium
                     textMedium

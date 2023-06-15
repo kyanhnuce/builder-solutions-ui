@@ -27,7 +27,7 @@ function BoxItems({
         to={
           item.name
             ? `/${item.solution}/${item.category}/${item.name}`
-            : item.namepr
+            : `/projects/${item.namepr}`
         }
         key={item.id}
         className={classes}

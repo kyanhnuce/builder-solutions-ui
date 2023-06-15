@@ -28,18 +28,22 @@ function Solutions() {
     fetchData();
   }, [pathname]);
 
+  console.log(categoryValue);
+
   // Render history theo từng index được truyền vào
   const renderHistory = () => {
-    const titleHistory = categoryValue.titleContent.split('/');
-    const desHistory = categoryValue.content.split('/');
-    const render = titleHistory.map((title, index) => (
-      <div key={`item-${index}`}>
-        <p className={cx('title')}>{title}</p>
-        <p className={cx('description')}>{desHistory[index]}</p>
-      </div>
-    ));
+    if (isDataFetched === true) {
+      const titleHistory = categoryValue.titleContent.split('/');
+      const desHistory = categoryValue.content.split('/');
+      const render = titleHistory.map((title, index) => (
+        <div key={`item-${index}`}>
+          <p className={cx('title')}>{title}</p>
+          <p className={cx('description')}>{desHistory[index]}</p>
+        </div>
+      ));
 
-    return render;
+      return render;
+    }
   };
   return (
     <div className={cx('wrapper')}>
@@ -48,12 +52,12 @@ function Solutions() {
         <div className={cx('content')}>
           <h1>{categoryValue.title}</h1>
           <span>{categoryValue.description}</span>
-          {isDataFetched === true ? renderHistory() : null}
+          {isDataFetched === true && renderHistory()}
           <h2>Khám phá các Giải pháp</h2>
           <div className={cx('items-content')}>
             <BoxItems
               items={categoryValue.data}
-              className={cx('col-5')}
+              className={cx('col-5', 'col-3', 'col-1')}
               imgSmall
               textSmall
             />

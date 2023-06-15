@@ -46,6 +46,13 @@ const IntroItem = [
     fallbackImg: images.fbackImage,
     content: 'GIẢI PHÁP',
   },
+  {
+    pages: 'Projects Page',
+    img: images.projects,
+    alt: 'Projects Image',
+    fallbackImg: images.fbackImage,
+    content: 'DỰ ÁN TIÊU BIỂU',
+  },
 ];
 
 function Intro({
@@ -53,11 +60,20 @@ function Intro({
   profile = false,
   partner = false,
   solution = false,
+  projects = false,
   items = false,
   ...pastProps
 }) {
   const [introItem, setIntroItem] = useState([]);
-  const props = { home, profile, items, partner, solution, ...pastProps };
+  const props = {
+    home,
+    profile,
+    items,
+    partner,
+    solution,
+    projects,
+    ...pastProps,
+  };
   useEffect(() => {
     if (!!props.home) {
       setIntroItem(IntroItem.slice(0, 1));
@@ -69,6 +85,8 @@ function Intro({
       setIntroItem(IntroItem.slice(3, 4));
     } else if (!!props.solution) {
       setIntroItem(IntroItem.slice(4, 5));
+    } else if (!!props.projects) {
+      setIntroItem(IntroItem.slice(5, 6));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);

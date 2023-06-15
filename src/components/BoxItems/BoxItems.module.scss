@@ -1,4 +1,5 @@
 .wrapper {
+  height: auto;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -84,18 +85,4 @@
   -webkit-box-orient: vertical;
   overflow: hidden;
   text-align: justify;
-}
-
-@media screen and (max-width: 1050px) {
-  .wrapper {
-    width: calc(50% - 3rem);
-    margin-bottom: 20px;
-  }
-}
-
-@media screen and (max-width: 850px) {
-  .wrapper {
-    width: calc(100% - 3rem);
-    margin-bottom: 20px;
-  }
 }

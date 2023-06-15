@@ -16,6 +16,20 @@
   --font-family-title: 'SarabunNew';
   --font-family-content: 'SarabunNewBold';
   --font-family-icons: 'Material Design Icons';
+
+  // $slick-font-path: './fonts/' !default;
+  // $slick-font-family: 'slick' !default;
+  // $slick-loader-path: './' !default;
+  // $slick-arrow-color: white !default;
+  // $slick-dot-color: black !default;
+  // $slick-dot-color-active: $slick-dot-color !default;
+  // $slick-prev-character: '\2190' !default;
+  // $slick-next-character: '\2192' !default;
+  // $slick-dot-character: '\2022' !default;
+  // $slick-dot-size: 6px !default;
+  $slick-opacity-default: 0.75;
+  $slick-opacity-on-hover: 1;
+  $slick-opacity-not-active: 0.25;
 }
 
 * {
@@ -74,12 +88,30 @@ ul {
 }
 
 // Responsive
-.col-4 {
-  width: calc(25% - 30px);
+@media screen and (min-width: 1050px) {
+  .col-4 {
+    width: calc(25% - 30px);
+  }
+  .col-5 {
+    width: calc(20% - 30px);
+  }
 }
-.col-5 {
-  width: calc(20% - 30px);
+
+@media screen and (max-width: 1050px) {
+  .col-2 {
+    width: calc(50% - 30px);
+  }
+  .col-3 {
+    width: calc(33.3333333% - 30px);
+  }
 }
+
+@media screen and (max-width: 780px) {
+  .col-1 {
+    width: calc(100% - 30px);
+  }
+}
+
 // fonts embedded
 @font-face {
   font-family: SarabunNew;
@@ -146,4 +178,79 @@ body {
   .tippy-box[data-placement^='bottom'] > .tippy-arrow:before {
     top: -8px;
   }
+}
+
+// Slick-slide
+body {
+  .slick-slider {
+    position: relative;
+    display: block;
+    z-index: 2;
+  }
+  .slick-slider {
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-touch-callout: none;
+    -khtml-user-select: none;
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .slick-track {
+    position: relative;
+    top: 0;
+    left: 0;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+.slider-wrapper {
+  text-align: center;
+}
+
+.slick-prev,
+.slick-next {
+  position: absolute;
+  z-index: 1;
+  top: 50%;
+  background-color: hsla(0, 0%, 100%, 0.9);
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  font-size: 36px;
+  -webkit-box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2), 0 1px 3px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2), 0 3px 5px rgba(0, 0, 0, 0.1);
+  -webkit-transition: background-color 0.3s ease-in-out;
+  transition: background-color 0.3s ease-in-out;
+  outline: none;
+
+  &:hover {
+    background: var(--linear);
+  }
+
+  &:focus {
+    background-color: hsla(0, 0%, 100%, 0.9);
+  }
+}
+
+.slick-prev:before,
+.slick-next:before {
+  font-family: 'slick';
+  font-size: 20px;
+  line-height: 1;
+  opacity: 0.75;
+  color: var(--black);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.slick-initialized .slick-slide {
+  margin: 20px;
+  height: 350px;
 }

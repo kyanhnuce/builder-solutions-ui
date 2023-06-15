@@ -1,4 +1,4 @@
-import { useRef, useEffect, useState, Fragment } from 'react';
+import { useRef, useEffect, useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faCircleXmark,
